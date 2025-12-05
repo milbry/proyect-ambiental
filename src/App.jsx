@@ -39,30 +39,99 @@ const faqItems = [
 // COMPONENTES
 // -----------------------------------------------------------------------------
 
+import { useState } from "react";
+
 function Nav() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow z-50 py-4 px-8 flex justify-between items-center animate-fade-down">
-      <h1 className="text-2xl font-bold text-green-700">Proyecto Ambiental</h1>
-      <div className="space-x-6 text-lg">
-        <a href="#objetivo" className="hover:text-green-600">Objetivo</a>
-        <a href="#realizados" className="hover:text-green-600">Realizados</a>
-        <a href="#porrealizar" className="hover:text-green-600">Por Realizar</a>
-        <a href="#integrantes" className="hover:text-green-600">Integrantes</a>
-        <a href="#galeria" className="hover:text-green-600">Galería</a>
-        <a href="#contacto" className="hover:text-green-600">Contacto</a>
+    <nav className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow z-50 px-8 py-4 flex justify-between items-center animate-fade-down">
+
+      {/* Logo */}
+      <h1 className="text-2xl md:text-3xl font-extrabold text-green-700 tracking-tight">
+        Proyecto Ambiental
+      </h1>
+
+      {/* Desktop Links */}
+      <div className="hidden md:flex space-x-8 text-lg font-medium">
+        <a href="#objetivo" className="hover:text-green-600 transition">Objetivo</a>
+        <a href="#realizados" className="hover:text-green-600 transition">Realizados</a>
+        <a href="#porrealizar" className="hover:text-green-600 transition">Por Realizar</a>
+        <a href="#integrantes" className="hover:text-green-600 transition">Integrantes</a>
+        <a href="#galeria" className="hover:text-green-600 transition">Galería</a>
+        <a href="#contacto" className="hover:text-green-600 transition">Contacto</a>
       </div>
+
+      {/* Hamburger Button */}
+      <button
+        className="md:hidden text-green-700 text-3xl focus:outline-none"
+        onClick={() => setOpen(!open)}
+      >
+        {open ? "✖" : "☰"}
+      </button>
+
+      {/* Mobile Menu */}
+      {open && (
+        <div className="absolute top-full left-0 w-full bg-white shadow-lg md:hidden animate-fade-down">
+          <div className="flex flex-col items-center text-lg py-4 space-y-4 font-medium">
+            <a href="#objetivo" className="hover:text-green-600" onClick={() => setOpen(false)}>Objetivo</a>
+            <a href="#realizados" className="hover:text-green-600" onClick={() => setOpen(false)}>Realizados</a>
+            <a href="#porrealizar" className="hover:text-green-600" onClick={() => setOpen(false)}>Por Realizar</a>
+            <a href="#integrantes" className="hover:text-green-600" onClick={() => setOpen(false)}>Integrantes</a>
+            <a href="#galeria" className="hover:text-green-600" onClick={() => setOpen(false)}>Galería</a>
+            <a href="#contacto" className="hover:text-green-600" onClick={() => setOpen(false)}>Contacto</a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
 
 function Hero() {
   return (
-    <section className="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-b from-green-200 to-green-50 animate-fade-up mt-16">
-      <h2 className="text-5xl font-extrabold text-green-700 mb-6 drop-shadow">Cuidando el planeta juntos</h2>
-      <p className="text-xl max-w-3xl text-gray-700">Nuestro grupo está comprometido con el medio ambiente y el bienestar de nuestra comunidad. Realizamos acciones que generan un impacto positivo.</p>
-      <div className="mt-8 flex gap-4">
-        <a href="#realizados" className="px-6 py-3 bg-green-600 text-white rounded-xl shadow hover:bg-green-700 transition">Ver proyectos</a>
-        <a href="#contacto" className="px-6 py-3 border border-green-600 text-green-600 rounded-xl shadow hover:bg-green-50 transition">Contactar</a>
+    <section className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-10 pt-32 pb-20 bg-gradient-to-br from-green-200 via-green-100 to-white animate-fade-up">
+
+      {/* Columna de texto */}
+      <div className="text-center md:text-left max-w-xl">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-green-700 leading-tight drop-shadow">
+          Cuidemos el planeta,
+          <span className="block text-green-900 mt-2">Juntos.</span>
+        </h1>
+
+        <p className="text-lg md:text-xl text-gray-700 mt-6 leading-relaxed">
+          Somos un grupo comprometido con la protección del medio ambiente.
+          Trabajamos con dedicación para transformar nuestra comunidad a través
+          de proyectos ecológicos y acciones responsables.
+        </p>
+
+        {/* Botones */}
+        <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
+          <a
+            href="#realizados"
+            className="px-7 py-3 bg-green-600 text-white font-medium rounded-xl shadow-lg hover:bg-green-700 transition transform hover:-translate-y-1"
+          >
+            Ver proyectos
+          </a>
+
+          <a
+            href="#contacto"
+            className="px-7 py-3 border border-green-700 text-green-700 font-medium rounded-xl hover:bg-green-50 shadow-lg transition transform hover:-translate-y-1"
+          >
+            Contactar
+          </a>
+        </div>
+      </div>
+
+      {/* Imagen decorativa */}
+      <div className="relative">
+        <img
+          src="lolg.png"
+          alt="Planeta Tierra"
+          className="w-72 md:w-96 drop-shadow-2xl animate-fade-up"
+        />
+
+        {/* Glow decorativo */}
+        <div className="absolute inset-0 bg-green-300 opacity-20 blur-3xl rounded-full -z-10"></div>
       </div>
     </section>
   );
